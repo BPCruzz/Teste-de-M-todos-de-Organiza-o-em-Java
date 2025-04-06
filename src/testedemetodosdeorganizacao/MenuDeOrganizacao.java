@@ -1,13 +1,14 @@
 package testedemetodosdeorganizacao;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MenuDeOrganizacao {
 
     public void menuInicial() {
 
-        int[] tamanhoVetores = {100};
+        int[] tamanhoVetores = {100, 100};
 
         System.out.println("Seja bem vindo(a). Aperte enter para iniciar a medição!");
         Scanner teclado = new Scanner(System.in);
@@ -21,9 +22,11 @@ public class MenuDeOrganizacao {
     }
 
     public void menuRadixSort(int[] tamanhoVetores) {
+
         System.out.println("Radix Sort");
         organizarRadixCrescente(tamanhoVetores);
         organizarRadixDecrescente(tamanhoVetores);
+        organizarRadixAleatorio(tamanhoVetores);
 
     }
 
@@ -50,8 +53,15 @@ public class MenuDeOrganizacao {
         }
     }
 
-    public void organizarRadixAleatorio() {
+    public void organizarRadixAleatorio(int[] tamanhoVetores) {
+        System.out.println("Testando Radix Sort com vetor aleatorio");
 
+        for (int i = 0; i < tamanhoVetores.length; i++) {
+            int[] vetorOrganizar = preencheVetorAleatorio(tamanhoVetores[i]);
+            long tempoInicial = iniciaMedicaoTempo();
+            //chamo o método de organizar
+            finalizaMedicaoTempo(tempoInicial);
+        }
     }
 
     public void menuCoutingSort(int[] tamanhoVetores) {
@@ -92,6 +102,8 @@ public class MenuDeOrganizacao {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] += i;
         }
+        
+        System.out.println(Arrays.toString(vetor));
 
         return vetor;
 
@@ -103,15 +115,25 @@ public class MenuDeOrganizacao {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] += tamanhoVetor - i;
         }
-        
+
         System.out.println(Arrays.toString(vetor));
 
         return vetor;
 
     }
 
-    public void preencheVetorAleatorio() {
+    public int [] preencheVetorAleatorio(int tamanhoVetor) {
+        int[] vetor = new int[tamanhoVetor];
+        long seed = 100L;
+        Random sorteio = new Random(seed);
 
+        for (int i = 0; i < tamanhoVetor; i++) {
+            vetor[i] += sorteio.nextInt(100);
+        }
+
+        System.out.println(Arrays.toString(vetor));
+
+        return vetor;
     }
 
     private long iniciaMedicaoTempo() {
