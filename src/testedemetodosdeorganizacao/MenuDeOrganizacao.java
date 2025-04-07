@@ -8,15 +8,15 @@ public class MenuDeOrganizacao {
 
     public void menuInicial() {
 
-        int[] tamanhoVetores = {10};
+        int[] tamanhoVetores = {100, 500, 1000, 5000, 20000, 50000, 100000, 500000};
 
         System.out.println("Seja bem vindo(a). Aperte enter para iniciar a medição!");
         Scanner teclado = new Scanner(System.in);
         teclado.nextLine();
         System.out.println("Iniciando os testes.");
-        //menuCoutingSort(tamanhoVetores);
+        menuCoutingSort(tamanhoVetores);
         menuRadixSort(tamanhoVetores);
-        // menuBucketSort(tamanhoVetores);
+        menuBucketSort(tamanhoVetores);
 
     }
 
@@ -31,7 +31,7 @@ public class MenuDeOrganizacao {
 
     public void organizarRadixCrescente(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor organizado crescente");
-        
+
         for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorCrescente(tamanhoVetores[i]);
             int maiorElemento = acharMaiorElemento(vetorOrganizar);
@@ -46,7 +46,7 @@ public class MenuDeOrganizacao {
     public void organizarRadixDecrescente(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor organizado decrescente");
 
-         for (int i = 0; i < tamanhoVetores.length; i++) {
+        for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorDecrescente(tamanhoVetores[i]);
             int maiorElemento = acharMaiorElemento(vetorOrganizar);
             int digitos = String.valueOf(maiorElemento).length();
@@ -59,7 +59,7 @@ public class MenuDeOrganizacao {
     public void organizarRadixAleatorio(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor aleatorio");
 
-         for (int i = 0; i < tamanhoVetores.length; i++) {
+        for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorAleatorio(tamanhoVetores[i]);
             int maiorElemento = acharMaiorElemento(vetorOrganizar);
             int digitos = String.valueOf(maiorElemento).length();
@@ -119,7 +119,7 @@ public class MenuDeOrganizacao {
     }
 
     public void menuBucketSort(int[] tamanhoVetores) {
-        System.out.println("Couting Sort");
+        System.out.println("Bucket Sort Sort");
         organizarBucketCrescente(tamanhoVetores);
         organizarBucketDecrescente(tamanhoVetores);
         organizarBucketAleatorio(tamanhoVetores);
@@ -129,33 +129,39 @@ public class MenuDeOrganizacao {
         System.out.println("Testando Bucket Sort com vetor organizado crescente");
 
         for (int i = 0; i < tamanhoVetores.length; i++) {
-            int[] vetorOrganizar = preencheVetorCrescente(tamanhoVetores[i]);
+            int[] vetorDesorganizadoInteiro = preencheVetorCrescente(tamanhoVetores[i]);
+            double[] vetorDesorganizadoDouble = trocarTipos(vetorDesorganizadoInteiro);
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            double[] vetorOrganizado = BucketSort.bucketSort(vetorDesorganizadoDouble);
             finalizaMedicaoTempo(tempoInicial);
+
         }
     }
 
     public void organizarBucketDecrescente(int[] tamanhoVetores) {
-        System.out.println("Testando Couting Sort com vetor organizado decrescente");
+        System.out.println("Testando Bucket Sort com vetor organizado decrescente");
 
         for (int i = 0; i < tamanhoVetores.length; i++) {
-            int[] vetorOrganizar = preencheVetorDecrescente(tamanhoVetores[i]);
+            int[] vetorDesorganizadoInteiro = preencheVetorDecrescente(tamanhoVetores[i]);
+            double[] vetorDesorganizadoDouble = trocarTipos(vetorDesorganizadoInteiro);
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            double[] vetorOrganizado = BucketSort.bucketSort(vetorDesorganizadoDouble);
             finalizaMedicaoTempo(tempoInicial);
+
         }
 
     }
 
     public void organizarBucketAleatorio(int[] tamanhoVetores) {
-        System.out.println("Testando Couting Sort com vetor aleatorio");
+        System.out.println("Testando Bucket Sort com vetor aleatorio");
 
         for (int i = 0; i < tamanhoVetores.length; i++) {
-            int[] vetorOrganizar = preencheVetorAleatorio(tamanhoVetores[i]);
+            int[] vetorDesorganizadoInteiro = preencheVetorAleatorio(tamanhoVetores[i]);
+            double[] vetorDesorganizadoDouble = trocarTipos(vetorDesorganizadoInteiro);
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            double[] vetorOrganizado = BucketSort.bucketSort(vetorDesorganizadoDouble);
             finalizaMedicaoTempo(tempoInicial);
+
         }
     }
 
@@ -165,8 +171,6 @@ public class MenuDeOrganizacao {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] += i;
         }
-
-        System.out.println(Arrays.toString(vetor));
 
         return vetor;
 
@@ -178,8 +182,6 @@ public class MenuDeOrganizacao {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] += tamanhoVetor - i;
         }
-
-        System.out.println(Arrays.toString(vetor));
 
         return vetor;
 
@@ -193,8 +195,6 @@ public class MenuDeOrganizacao {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] += sorteio.nextInt(100);
         }
-
-        System.out.println(Arrays.toString(vetor));
 
         return vetor;
     }
@@ -226,4 +226,16 @@ public class MenuDeOrganizacao {
 
     }
 
+    public double[] trocarTipos(int[] inteiros) {
+        double[] decimais = new double[inteiros.length];
+
+        int max = acharMaiorElemento(inteiros); // função que você já tem
+
+        for (int i = 0; i < inteiros.length; i++) {
+            decimais[i] = (double) inteiros[i] / max;
+        }
+
+        return decimais;
+
+    }
 }

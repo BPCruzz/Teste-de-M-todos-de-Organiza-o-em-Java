@@ -12,7 +12,7 @@ public class RadixSort {
             fator *= 10; // Vai para dezenas, centenas, etc.
         }
         
-        System.out.println("Vetor Organizado: " + "\n" + Arrays.toString(vetor));
+      
 
     }
 

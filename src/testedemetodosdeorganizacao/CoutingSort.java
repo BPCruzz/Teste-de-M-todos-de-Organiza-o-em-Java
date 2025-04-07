@@ -28,7 +28,7 @@ public class CoutingSort {
             contagem[entrada[j]] = contagem[entrada[j]] - 1;
         }
 
-        System.out.println("vetor apos ordenação: " + "\n" + Arrays.toString(saida));
+        
     }
 
 }
