@@ -14,8 +14,8 @@ public class MenuDeOrganizacao {
         Scanner teclado = new Scanner(System.in);
         teclado.nextLine();
         System.out.println("Iniciando os testes.");
-        menuCoutingSort(tamanhoVetores);
-        // menuRadixSort(tamanhoVetores);
+        //menuCoutingSort(tamanhoVetores);
+        menuRadixSort(tamanhoVetores);
         // menuBucketSort(tamanhoVetores);
 
     }
@@ -31,11 +31,13 @@ public class MenuDeOrganizacao {
 
     public void organizarRadixCrescente(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor organizado crescente");
-
+        
         for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorCrescente(tamanhoVetores[i]);
+            int maiorElemento = acharMaiorElemento(vetorOrganizar);
+            int digitos = String.valueOf(maiorElemento).length();
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            RadixSort.radixSort(vetorOrganizar, digitos);
             finalizaMedicaoTempo(tempoInicial);
         }
 
@@ -44,10 +46,12 @@ public class MenuDeOrganizacao {
     public void organizarRadixDecrescente(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor organizado decrescente");
 
-        for (int i = 0; i < tamanhoVetores.length; i++) {
+         for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorDecrescente(tamanhoVetores[i]);
+            int maiorElemento = acharMaiorElemento(vetorOrganizar);
+            int digitos = String.valueOf(maiorElemento).length();
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            RadixSort.radixSort(vetorOrganizar, digitos);
             finalizaMedicaoTempo(tempoInicial);
         }
     }
@@ -55,10 +59,12 @@ public class MenuDeOrganizacao {
     public void organizarRadixAleatorio(int[] tamanhoVetores) {
         System.out.println("Testando Radix Sort com vetor aleatorio");
 
-        for (int i = 0; i < tamanhoVetores.length; i++) {
+         for (int i = 0; i < tamanhoVetores.length; i++) {
             int[] vetorOrganizar = preencheVetorAleatorio(tamanhoVetores[i]);
+            int maiorElemento = acharMaiorElemento(vetorOrganizar);
+            int digitos = String.valueOf(maiorElemento).length();
             long tempoInicial = iniciaMedicaoTempo();
-            //chamo o método de organizar
+            RadixSort.radixSort(vetorOrganizar, digitos);
             finalizaMedicaoTempo(tempoInicial);
         }
     }
